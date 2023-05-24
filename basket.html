@@ -1,0 +1,290 @@
+<!-- begin::js_inline -->
+Extend('oApp.oBasket', {
+	url: '{url}',
+	tpl: {tpl},
+	data: {data},
+	totalSum: {total_sum},
+	currencyName: '{currency_name}'
+});
+<!-- end::js_inline -->
+
+<!-- begin::basket -->
+<div id="basket_toolbar" class="flx"></div>
+<div id="basket_content"></div>
+<div class="help">
+	<h3>Обратите внимание:</h3>
+	<div id="basket_wrong_content"></div>
+	<ul>
+		<li>
+			<b>Вернуть качественный товар можно только СТРОГО в товарном виде! Обратите внимание на внешнее состояние упаковки при приемке заказа! Если вам отгрузили позиции в нетоварном виде, у вас есть 2 дня для возврата (Брак -> "Нетоварный внешний вид упаковки").</b>
+		</li>
+		<li>
+			Если вы забираете товар самовывозом — не оставляйте товар на стойке без присмотра! Если вы забираете не все позиции, пожалуйста, предупредите сотрудника самовывоза и оформите бланк возврата.
+		</li>
+		<li>
+			На товар, который вы не забрали с самовывоза и не приложили к нему бланк возврата, автоматически возврат не оформляется! Данная позиция будет числиться за вами без возврата средств.
+		</li>
+		<li>
+			Срок хранения товаров в корзине составляет 24 часа.
+		</li>
+		<li>
+			Вы можете отложить заказ конкретной позиции, сняв галочку в столбце &quot;Заказать&quot;. Товары со снятой галочкой будут игнорироваться при нажатии кнопки &quot;Оформить заказ&quot;.
+		</li>
+		<li>
+			Для заказа позиций с партнерских складов необходимо подтвердить согласие с дополнительными условиями поставки. Эти позиции обозначены иконкой <img src="/content/img/alert.svg"> в столбце со сроками поставки.
+		</li>
+		<li>
+			Мы не осуществляем продажу крупногабаритных кузовных деталей и стекла. Эти товары могут быть удалены из вашего заказа.
+		</li>
+		<li>
+			Все заказанные товары в первую очередь отгружаются из наличия локального склада, даже если исходный заказ был оформлен на один из центральных складов.
+		</li>
+	</ul>
+</div>
+<!-- end::basket -->
+
+<!-- begin::checkout_link -->
+<div><input type="button" value="Заказы к отправке" onclick="Redirect('checkout.php')"><span class="blink">У ВАС ЕСТЬ НЕОТПРАВЛЕННЫЕ ЗАКАЗЫ !!!</span></div>
+<!-- end::checkout_link -->
+
+<!-- begin::basket_clear -->
+<div></div><span class="basket_clear_button ptr uns" onclick="{ns}.showConfirmPanel();">Очистить корзину</span>
+<!-- end::basket_clear -->
+
+<!-- begin::basket_empty -->
+<h2>В вашей корзине нет товаров</h2>
+<!-- end::basket_empty -->
+
+<!-- begin::basket_table -->
+<div class="basket_tbl">
+<table class="tbl">
+	<tr>
+		<th class="part_code_col">Артикул</th>
+		<th class="brand_name_col">Бренд</th>
+		<th class="name_col">Наименование</th>
+		<th class="date_col">Срок поставки</th>
+		<th class="quantity_col">Количество</th>
+		<th class="price_col">Цена</th>
+		<th class="price_col">Стоимость</th>
+		<th class="contract_col">Условия</th>
+		<th class="comment_col">Комментарий</th>
+		<th class="order_col">Заказать</th>
+		<th class="del_col">Удалить</th>
+	</tr>
+	{basket_rows}
+	<tr class="total_row">
+		<td colspan="5"></td>
+		<td>Итого:</td>
+		<td>{total_sum} {currency_name}</td>
+		<td colspan="4"></td>
+	</tr>
+</table>
+</div>
+<div class="order_buttons_block">
+{basket_order_buttons}
+</div>
+<!-- end::basket_table -->
+
+<!-- begin::basket_order_help_button -->
+<a href="/delivery.php" class="uns" target="_blank">Что выбрать?</a>
+<!-- end::basket_order_help_button -->
+
+<!-- begin::basket_order_delivery_button -->
+<input type="button" value="Доставка" onclick="{ns}.checkConditions('0JTQvtGB0YLQsNCy0LrQsA==');"></td>
+<!-- end::basket_order_delivery_button -->
+
+<!-- begin::basket_order_pickup_button -->
+<b>Оформить заказ:</b>
+<input type="button" class="button_self_dlv" value="Самовывоз" onclick="{ns}.checkConditions('0KHQsNC80L7QstGL0LLQvtC3');"></td>
+<!-- end::basket_order_pickup_button -->
+
+<!-- begin::basket_order_express_button -->
+<input type="button" class="button_express" value="Экспресс" onclick="{ns}.checkConditions('0K3QutGB0L/RgNC10YHRgQ==');"></td>
+<!-- end::basket_order_express_button -->
+
+<!-- begin::need -->
+<img src="/content/img/alert.svg" width="16" height="16" class="basket_icon" data-tooltip="Для оформления заказа нужно принять условия" onmouseover="oApp.core.tooltip.handler(event)" onmouseout="oApp.core.tooltip.handler(event)">
+<!-- end::need -->
+
+<!-- begin::long -->
+<img src="/content/img/alert.svg" width="16" height="16" class="basket_icon" data-tooltip="Для оформлениия заказа нужно принять условия" onmouseover="oApp.core.tooltip.handler(event)" onmouseout="oApp.core.tooltip.handler(event)">
+<img src="/content/img/watch_b.svg" width="16" height="16" class="basket_icon clock" data-tooltip="Обратите внимание: срок поставки больше 10 дней!" onmouseover="oApp.core.tooltip.handler(event)" onmouseout="oApp.core.tooltip.handler(event)">
+<!-- end::long -->
+
+<!-- begin::acpt -->
+<img src="/content/img/check.svg" width="16" height="16" class="basket_icon" data-tooltip="Вы приняли дополнительные условия поставки" onmouseover="oApp.core.tooltip.handler(event)" onmouseout="oApp.core.tooltip.handler(event)">
+<!-- end::acpt -->
+
+<!-- begin::basket_row -->
+<tr id="{id}">
+	<td><a href="/search.php?part_id={part_id}">{part_code}</a></td>
+	<td>{brand_name}</td>
+	<td class="left_cell">{part_name}<br><small title="{part_comment}">{part_comment}</small></td>
+	<td class="date_cell">{condition_state}{warehouse_name}<br>{delivery_date}</td>
+	<td>
+		<span class="mns bg" id="minus_{id}" onclick="{ns}.saveQuantity({id}, {version}, event, getById('quantity_{id}'), -1)">-</span>
+		<input type="text" id="quantity_{id}" data-qty="{quantity}" data-pkg="{package}" class="input_qty bg" maxlength="3" value="{quantity}" onkeypress="{ns}.qtyKeyPress(event)" onkeydown="{ns}.qtyKeyDown({id}, {version}, event, this)" onclick="this.select()" onblur="{ns}.saveQuantity({id}, {version}, event, this, 0)">
+		<span class="pls bg" id="plus_{id}" onclick="{ns}.saveQuantity({id}, {version}, event, getById('quantity_{id}'), 1)">+</span>
+	</td>
+	<td class="price_cell">{price} {currency_name}</td>
+	<td class="price_cell">{sum} {currency_name}</td>
+	<td>{contract_name}<br>{address_name}</td>
+	<td>
+		<input type="text" id="comment_{id}" data-initial="{comment}" class="input_comment" onkeyup="{ns}.saveComment({id}, {version}, event, this)" value="{comment}" maxlength="250" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" onblur="{ns}.saveComment({id}, {version}, event, this)">
+	</td>
+	<td>
+		<input type="checkbox" {in_order_checked} onclick="{ns}.toggleInOrder({id}, {version}, this);">
+	</td>
+	<td><img src="/content/img/close.svg" width="16" height="16" class="ptr" onclick="{ns}.del({id}, {version});"></td>
+</tr>
+<!-- end::basket_row -->
+
+<!-- begin::basket_wrong_table -->
+<p>Следующие товары были исключены из корзины:</p>
+<div class="basket_tbl">
+<table class="tbl">
+	<tr>
+		<th class="part_code_col">Артикул</th>
+		<th class="brand_name_col">Бренд</th>
+		<th>Наименование</th>
+		<th>Ошибка</th>
+		<th class="date_col">Склад</th>
+		<th class="quantity_col">Количество</th>
+		<th class="contract_col">Условия</th>
+		<th class="comment_col">Комментарий</th>
+		<th class="del_col">Удалить</th>
+	</tr>
+	{basket_wrong_rows}
+</table>
+</div>
+<!-- end::basket_wrong_table -->
+
+<!-- begin::basket_wrong_row -->
+<tr>
+  <td class="ptr" onclick="{ns}.selectPart({part_id})">{part_code}</td>
+  <td>{brand_name}</td>
+  <td class="left_cell">{part_name}<br><small title="{part_comment}">{part_comment}</small></td>
+  <td class="error_cell" title="{error_message}">{error_message}</td>
+	<td>{warehouse_name}</td>
+  <td>{quantity}</td>
+  <td>{contract_name}<br>{address_name}</td>
+  <td class="left_cell">{comment}</td>
+  <td><img src="/content/img/close.svg" class="ptr" onclick="{ns}.del({id}, {version});"></td>
+</tr>
+<!-- end::basket_wrong_row -->
+
+<!-- begin::basket_conditions_panel -->
+<div class="basket_conditions_panel flxv">
+	<div class="ak_panel_btn_close" onclick="%close%"></div>
+	<h2>Дополнительные условия</h2>
+	<p>Обращаем ваше внимание, что в заказе присутствуют товары с дополнительными условиями поставки:</p>
+	<ul>
+		<li>
+			Артикулы с увеличенным сроком поставки
+			<div class="panel_tbl_wrap">
+				<table class="tbl">
+					<tr>
+						<th class="part_code_col">Артикул</th>
+						<th class="brand_name_col">Бренд</th>
+						<th class="date_col">Склад</th>	
+						<th>Срок поставки</th>		
+					</tr>
+					{basket_condition_rows}
+				</table>
+			</div>
+		</li>
+		<li>
+			Возврат этих товаров возможен исключительно с удержанием 30% стоимости для неоригинальных и 50% для оригинальных запасных частей.<br>
+			При этом, мы оставляем за собой право отказать в возврате таких товаров.<br>
+			Неверные кросс-коды или наименования товаров не являются основанием для оформления возврата без удержания.
+		</li>
+		{basket_condition_oem}
+	</ul>
+	<div class="btn_wrap">
+		<input type="button" value="Я принимаю условия" onclick="{ns}.acceptConditions('{delivery_mode}')">
+		<input type="button" value="Вернуться в корзину" onclick="%close%">
+	</div>
+</div>
+<!-- end::basket_conditions_panel -->
+
+<!-- begin::basket_condition_oem -->
+<li>При заказе оригинальных запасных частей, возможна односторонняя замена номера согласно актуальному списку замен автопроизводителя (без изменения цены).</li>
+<!-- end::basket_condition_oem -->
+
+<!-- begin::basket_condition_row -->
+<tr class="{cls}">
+	<td>{part_code}</td>
+	<td>{brand_name}</td>
+	<td>{warehouse_name}</td>
+	<td>{days}</td>
+</tr>
+<!-- end::basket_condition_row -->
+
+<!-- begin::basket_clear_panel -->
+<div class="basket_clear_panel flxv">
+	<div class="ak_panel_btn_close" onclick="%close%"></div>
+	<h2>Вопрос</h2>
+	<p>Удалить все товары из корзины?</p>
+	<div class="btn_wrap">
+		<input type="button" class="button" value="Да" onclick="{ns}.clear()">
+		<input type="button" class="button" value="Нет" onclick="%close%">
+	</div>
+</div>
+<!-- end::basket_clear_panel -->
+
+<!-- begin::basket_outposts_panel -->
+<div class="basket_outposts_panel flxv">
+	<div class="ak_panel_btn_close" onclick="%close%"></div>
+	<h2>Выберите пункт выдачи</h2>
+	<div class="flx outpost_content_wrap">
+		<form name="outposts_form" class="flxv outpost_list">{outpost_content}</form>
+		<div class="outpost_info">
+			<div id="outpost_detail"></div>
+			<div id="outpost_map"></div>
+		</div>
+	</div>
+	<div class="btn_wrap">
+		<input type="button" class="button" value="ОК" onclick="{ns}.choiceOutpost('{delivery_mode}')">
+		<input type="button" class="button" value="Закрыть" onclick="%close%">
+	</div>
+</div>
+<!-- end::basket_outposts_panel -->
+
+<!-- begin::outpost_link -->
+<div class="outpost_link_blk flx">
+	<input type="radio" id="outpost_{id}" name="outpost" value="{id}" onchange="{ns}.onSelect('{id}')" class="outpost_radio" {checked}>
+	<label for="outpost_{id}" class="outpost_link">{name}</label>
+</div>
+<!-- end::outpost_link -->
+
+<!-- begin::outpost_blk -->
+<div class="flx outpost_blk">
+	<div>
+		<div class="flx outpost_descr"><img src="/content/img/geopoint.svg"><a href="geo:{latitude},{longitude}?z=14">{address}</a></div>
+		<div class="flx outpost_descr"><img src="/content/img/watch.svg">{worktime}</div>
+		<div class="flx outpost_descr"><img src="/content/img/phone.svg"><a href="tel:{phone_num}">{phone_num}</a>&nbsp;{phone_dop}</div>
+	</div>
+	{image_blk}
+</div>
+{schedule_blk}
+<!-- end::outpost_blk -->
+
+<!-- begin::image_blk -->
+<div class="ptr outpost_img_wrap" onclick="{ns}.showImg(this)">
+	<img src="{src}" class="outpost_img" loading="lazy">
+</div>
+<!-- end::image_blk -->
+
+<!-- begin::image_panel -->
+<div class="image_panel">
+	<div class="ak_panel_btn_close" onclick="%close%"></div>
+	<img src="{src}">
+</div>
+<!-- end::image_panel -->
+
+<!-- begin::schedule_blk -->
+<div class="schedule_blk">
+<b class="schedule_title">График исполнения заказов:</b>
+{schedule}
+</div>
+<!-- end::schedule_blk -->

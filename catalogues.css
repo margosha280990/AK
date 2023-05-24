@@ -1,0 +1,27 @@
+main {
+	background: unset;
+	padding: 0;
+}
+
+.cat_img {
+	margin: 20px auto;
+}
+
+.cat_grid {
+	display: grid;
+	grid-template-columns: repeat(5, 1fr);
+	/*column-gap: 20px;
+	row-gap: 20px;*/
+}
+
+.cat_group {
+	background: var(--white);
+	border-radius: var(--radius);
+	text-align: center;
+	height: 210px;
+	margin: 10px;
+}
+
+.cat_name {
+	/*padding: 5px;*/
+}

@@ -1,0 +1,120 @@
+<!-- begin::js_inline -->
+Extend('oApp.oCatalogOil', {
+	url: '{url}',
+	tpl: {tpl},
+	filters: {filters}
+});
+<!-- end::js_inline -->
+
+<!-- begin::oil -->
+<input type="radio" id="aside_expanded" name="aside" class="aside_radio" checked>
+<aside class="aside_expanded">
+	<label for="aside_collapsed" class="aside_collapse"></label>
+	<h3 class="aside_caption">Моторные масла</h3>
+	<label class="available_item">
+		<input type="checkbox" id="available_item" onclick="oApp.oCatalogOil.setAvailable(this.checked)">
+		В наличии
+	</label>
+	<div id="filters_block"></div>
+	<input type="button" value='Сбросить все' class="reset_all" onclick='oApp.oCatalogOil.resetAllFilters()'>
+</aside>
+
+<input type="radio" id="aside_collapsed" name="aside" class="aside_radio">
+<aside class="aside_collapsed">
+	<label for="aside_expanded" class="aside_expand"></label>
+	<span>Моторные масла</span>
+</aside>
+<div id="content" class="b_white">
+	<table class="table_result">
+		<tbody id="result"></tbody>
+		<tfoot id="empty"></tfoot>
+	</table>
+</div>
+<!-- end::oil -->
+
+<!-- begin::filter_block -->
+<div id="filter_{filter_name}" class="filter_block">
+	<h4 class="filter_caption {collapsed} ptr uns" onclick="{ns}.doFilterToggle(this)">{filter_descr}</h4>
+	<div class="filter_wrap {visibility}">
+		<span class="reset_link ptr uns" onclick="{ns}.resetFilter('{filter_name}')">Сбросить фильтр</span>
+		{filter_rows}
+	</div>
+</div>
+<!-- end::filter_block -->
+
+<!-- begin::filter_row -->
+<label class="filter_row">
+	<input type="checkbox" id="{filter_name}_{id}" onclick="{ns}.applyFilter('{filter_name}', {id}, this.checked)" {checked}>
+	{name}
+	<span id="{filter_cnt_name}_{id}_cnt">{cnt}</span>
+</label>
+<!-- end::filter_row -->
+
+<!-- begin::empty -->
+<tr><td colspan="{col}">По вашему запросу ничего не найдено.</td></tr>
+<!-- end::empty -->
+
+<!-- begin::header_row -->
+<tr onclick="{ns}.colSort(event)">
+	<th class="uns part_info_col">Инф.</th>
+	{header_row}
+</tr>
+<!-- end::header_row -->
+
+<!-- begin::header_col -->
+<th data-id="{id}" class="uns ptr {class}">{name}</th>
+<!-- end::header_col -->
+
+<!-- begin::part_row -->
+<tr class="part_row ptr" onclick="{ns}.selectPart({part_id}, event)">
+	<td class="part_info_cell">&nbsp;</td>
+	{part_row}
+</tr>
+<!-- end::part_row -->
+
+<!-- begin::part_col -->
+<td class="{cls}">{{id}}</td>
+<!-- end::part_col -->
+
+<!-- begin::qty_none -->
+<div class="qty qty_black" onmouseover="oApp.core.tooltip.handler(event)" onmouseout="oApp.core.tooltip.handler(event)" data-tooltip="Нет в наличии"></div>
+<!-- end::qty_none -->
+
+<!-- begin::qty_less -->
+<div class="qty qty_red" onmouseover="oApp.core.tooltip.handler(event)" onmouseout="oApp.core.tooltip.handler(event)" data-tooltip="Мало"></div>
+<!-- end::qty_less -->
+
+<!-- begin::qty_norm -->
+<div class="qty_border qty_orange" onmouseover="oApp.core.tooltip.handler(event)" onmouseout="oApp.core.tooltip.handler(event)" data-tooltip="Достаточно">
+	<div></div>
+	<div></div>
+</div>
+<!-- end::qty_norm -->
+
+<!-- begin::qty_many -->
+<div class="qty_border qty_green" onmouseover="oApp.core.tooltip.handler(event)" onmouseout="oApp.core.tooltip.handler(event)" data-tooltip="Много">
+	<div></div>
+	<div></div>
+	<div></div>
+</div>
+<!-- end::qty_many -->
+
+<!-- begin::others_open -->
+<div class="others_block {visibility}">
+<!-- end::others_open -->
+
+<!-- begin::others_close -->
+</div>
+<!-- end::others_close -->
+
+<!-- begin::toggle_link -->
+<span class="toggle_link ptr uns" onclick="{ns}.doOthersToggle(this)">{name}</span>
+<!-- end::toggle_link -->
+
+<!-- begin::toggle_link_show -->
+Показать ещё
+<!-- end::toggle_link_show -->
+
+<!-- begin::toggle_link_hide -->
+Скрыть
+<!-- end::toggle_link_hide -->

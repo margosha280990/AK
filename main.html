@@ -1,0 +1,350 @@
+<!-- begin::main -->
+<!DOCTYPE html>
+<html lang="{language}">
+	<head>
+		<meta charset="{charset}">
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+		{non_indexed}
+		<title>Автоконтинент :: {title}</title>
+		<link rel="icon" href="/favicon.ico" type="image/x-icon">
+		<link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
+		<meta name="description" content="Оптовая продажа запчастей для легковых и грузовых автомобилей, мотоциклов. Свои склады в СПб, В.Новгороде, Вологде, Москве, Мурманске, Петрозаводске, Пскове, Твери, Череповце, Архангельске, Смоленске. Более 200 брендов в наличии, доставка до дверей, лояльные условия по возвратам.">
+		<meta property="og:image" content="{protocol}://{site_domain}/content/img/apple_icon/apple-touch-icon-152x152.png">
+		<link rel="image_src" href="/content/img/apple_icon/apple-touch-icon-152x152.png">
+		{apple_icons}
+		{css_files}
+		<link rel="stylesheet" href="/pages/main/mobile.css?v=1645101201">
+		<style>
+		{css_inline}
+		</style>
+		{js_files}
+		<script>
+		{js_inline}
+		</script>
+	</head>
+	<body>
+		<div class="btn-up btn-up_hide"></div>
+		<header>
+			<div class="flx h_toolbar">
+				{logo}
+				{MENU_BLOCK_search}
+				{seek_block}
+				<div class="h_spacer"></div>
+				<div class="h_basket_m">{PAGE_BLOCK_basket}</div>
+				<div class="h_login_auth">
+					{PAGE_BLOCK_change_login}
+					{PAGE_BLOCK_login_state}
+					{MENU_BLOCK_logoff}
+				</div>
+				{PAGE_BLOCK_registration}
+			</div>
+			<div class="flx h_menu">
+				<input id="menu__toggle" type="checkbox" />
+				<label class="menu__btn" for="menu__toggle">
+					<span></span>
+				</label>
+				<nav class="menu__box">
+					{PAGE_LINK_orders}
+					{PAGE_LINK_balance}
+					{PAGE_LINK_returns}
+					{PAGE_LINK_about_us}
+					{PAGE_LINK_brands}
+					{PAGE_LINK_actions}
+					{MENU_BLOCK_info}
+					{PAGE_LINK_contacts}
+				</nav>
+			</div>
+			<div class="diskl_mobile">Поверните телефон горизонтально, чтобы работать с сайтом было удобнее!</div>
+		</header>
+		<main>
+			{content}
+		</main>
+		<footer class="flx">
+			<div class="f_lang">
+				{languages}
+			</div>
+			<a href="{PAGE_URL_payments_info}">
+				<img src="/content/img/payment_logos.png" width="135" height="20">
+			</a>
+			<div class="f_copy" onclick="Redirect('{PAGE_URL_112}')">Copyright &copy; 2009-{current_year}, «Автоконтинент»</div>
+<script>
+    const btnUp = {
+      el: document.querySelector('.btn-up'),
+      scrolling: false,
+      show() {
+        if (this.el.classList.contains('btn-up_hide') && !this.el.classList.contains('btn-up_hiding')) {
+          this.el.classList.remove('btn-up_hide');
+          this.el.classList.add('btn-up_hiding');
+          window.setTimeout(() => {
+            this.el.classList.remove('btn-up_hiding');
+          }, 300);
+        }
+      },
+      hide() {
+        if (!this.el.classList.contains('btn-up_hide') && !this.el.classList.contains('btn-up_hiding')) {
+          this.el.classList.add('btn-up_hiding');
+          window.setTimeout(() => {
+            this.el.classList.add('btn-up_hide');
+            this.el.classList.remove('btn-up_hiding');
+          }, 300);
+        }
+      },
+      addEventListener() {
+        // при прокрутке окна (window)
+        window.addEventListener('scroll', () => {
+          const scrollY = window.scrollY || document.documentElement.scrollTop;
+          if (this.scrolling && scrollY > 0) {
+            return;
+          }
+          this.scrolling = false;
+          // если пользователь прокрутил страницу более чем на 200px
+          if (scrollY > 400) {
+            // сделаем кнопку .btn-up видимой
+            this.show();
+          } else {
+            // иначе скроем кнопку .btn-up
+            this.hide();
+          }
+        });
+        // при нажатии на кнопку .btn-up
+        document.querySelector('.btn-up').onclick = () => {
+          this.scrolling = true;
+          this.hide();
+          // переместиться в верхнюю часть страницы
+          window.scrollTo({
+            top: 0,
+            left: 0,
+            behavior: 'smooth'
+          });
+        }
+      }
+    }
+
+    btnUp.addEventListener();
+</script>
+		</footer>
+	</body>
+</html>
+<!-- end::main -->
+
+<!-- begin::css_files -->
+<link rel="stylesheet" href="{url}">
+<!-- end::css_files -->
+
+<!-- begin::js_files -->
+<script src="{url}"></script>
+<!-- end::js_files -->
+
+<!-- begin::logo -->
+<a href="{base_url}"><img src="/content/img/logo.svg" width="61" height="36">{logo_text}</a>
+<!--<a href="{base_url}" class="logo_ny"><img src="/content/img/logo_new_year.svg" style="height: 50px;">{logo_text}</a>-->
+<!-- end::logo -->
+
+<!-- begin::logo_en -->
+<img src="/content/img/logo_en.png" class="h_logo_margin">
+<!-- end::logo_en -->
+
+<!-- begin::logo_ru -->
+<img src="/content/img/logo_ru.png" class="h_logo_margin">
+<!-- end::logo_ru -->
+
+<!-- begin::apple_icons -->
+<link rel="apple-touch-icon" href="/content/img/apple_icon/apple-touch-icon.png">
+<link rel="apple-touch-icon" sizes="57x57" href="/content/img/apple_icon/apple-touch-icon-57x57.png">
+<link rel="apple-touch-icon" sizes="72x72" href="/content/img/apple_icon/apple-touch-icon-72x72.png">
+<link rel="apple-touch-icon" sizes="76x76" href="/content/img/apple_icon/apple-touch-icon-76x76.png">
+<link rel="apple-touch-icon" sizes="114x114" href="/content/img/apple_icon/apple-touch-icon-114x114.png">
+<link rel="apple-touch-icon" sizes="120x120" href="/content/img/apple_icon/apple-touch-icon-120x120.png">
+<link rel="apple-touch-icon" sizes="144x144" href="/content/img/apple_icon/apple-touch-icon-144x144.png">
+<link rel="apple-touch-icon" sizes="152x152" href="/content/img/apple_icon/apple-touch-icon-152x152.png">
+<!-- end::apple_icons -->
+
+<!-- begin::MENU_BLOCK_search -->
+<div class="ptr uns h_menu_search">
+	<span class="h_menu_v" data-dropdown-id="h_menu_search" onclick="oApp.core.dropdown.toggle(this)">Меню</span>
+	<div id="h_menu_search" class="ak_dropdown_blk">
+		{catalogues}
+		{oem}
+		{oem_truck}
+		{batch}
+	</div>
+</div>
+<!-- end::MENU_BLOCK_search -->
+
+<!-- begin::seek_block -->
+<div class="h_seek">
+	<input type="text" id="h_seek_input" data-dropdown-id="h_seek_dd" oninput="oApp.oSeek.find(this)" onkeydown="oApp.oSeek.press()" onfocus="oApp.oSeek.show(this)" name="text" maxlength="50" value="" placeholder="Введите {placeholder}" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false">
+	<div id="h_seek_clear" class="input_clear" onclick="oApp.oSeek.clear('h_seek_input')"></div>
+</div>
+<div id="h_seek_dd" class="ak_dropdown_blk">
+	<div class="flx h_seek_wrap">
+	  <div id="h_seek_history"></div>
+	  <div class="h_seek_result flxv">
+		  <div id="h_vin_result_wrap">
+			  <h2>Результат поиска по VIN</h2>
+			  <div id="h_vin_result"></div>
+			</div>
+		  <h2>Результат поиска по артикулу</h2>
+		  <div id="h_code_result" class="flxv"></div>
+		</div>
+  </div>
+	<div class="ak_panel_bg h_seek_bg"></div>
+</div>
+<!-- end::seek_block -->
+
+<!-- begin::login_state_js_inline -->
+onLoad(function() {
+	if ({need_set_state}) {
+		oApp.core.pageInWin.open('{url}', {isCloseable: false});
+	}
+});
+<!-- end::login_state_js_inline -->
+
+<!-- begin::seek_js_inline -->
+Extend('oApp.oSeek', {
+	url: {url},
+	tplRowPart: '<a href="{part_url}"><span title="{part_code}">{part_code}</span><span>{brand_name}</span><span title="{part_descr}">{part_descr}</span></a>',
+	tplRowVin: '<a href="{vin_url}"><span>{brand}</span><span>{name}</span><span>{date}</span></a>',
+	tplEmpty: '<div class="h_empty_result">По вашему запросу ничего не найдено.</div>',
+	tplError: '<div class="h_error_result">Ошибка при обработке запроса!</div>'
+});
+<!-- end::seek_js_inline -->
+
+<!-- begin::used_parts_js_inline -->
+Extend('oApp.oUsedParts', {
+	url: '{url}',
+	tpl: '<h2>Последние 15 артикулов</h2><div id="h_used_parts" class="flxv"></div>',
+	tplRow: '<a href="{part_url}"><span title="{part_code}">{part_code}</span><span title="{brand_name}">{brand_name}</span></a>',
+	tplError: '<div class="h_error_result">Ошибка при получении данных!</div>'
+});
+<!-- end::used_parts_js_inline -->
+
+<!-- begin::used_vins_js_inline -->
+Extend('oApp.oUsedVins', {
+	url: '{url}',
+	tpl: '<h2>Последние 10 VIN</h2><div id="h_used_vins" class="flxv"></div>',
+	tplRow: '<a href="{vin_url}"><span>{vin}</span><span title="{model}">{model}</span></a>',
+	tplError: '<div class="h_error_result">Ошибка при получении данных!</div>'
+});
+<!-- end::used_vins_js_inline -->
+
+<!-- begin::basket_js_inline -->
+Extend('oApp.oBasket', {
+	url: '{url}',
+	sumTpl: '&nbsp;&nbsp;{total_sum}&nbsp;<span class="cur">{currency_name}</span>'
+});
+onLoad(oApp.oBasket.getTotalSum.bind(oApp.oBasket));
+<!-- end::basket_js_inline -->
+
+<!-- begin::PAGE_BLOCK_basket -->
+<a href="{url}" class="flx h_basket">
+	<img src="/content/img/basket.png" width="20" height="17">
+	<div id="basket_total_sum"></div>
+</a>
+<!-- end::PAGE_BLOCK_basket -->
+
+<!-- begin::PAGE_BLOCK_change_login -->
+<div class="h_change_login">
+	<div>{auth_login_id}</div>
+	<a href="{url}" class="h_change_login_url">сменить клиента</a>
+</div>
+<!-- end::PAGE_BLOCK_change_login -->
+
+<!-- begin::PAGE_BLOCK_login_state -->
+<div class="h_login_state">
+	<div>{work_login_id}</div>
+	<div class="ptr h_login_state_url" onclick="oApp.core.pageInWin.open('{url}')">{work_contract_name} | {work_address_name}</div>
+</div>
+<!-- end::PAGE_BLOCK_login_state -->
+
+<!-- begin::PAGE_BLOCK_registration -->
+<div class="h_reg">
+	<span id="auth_link" class="ptr">Вход</span> | <a href="{url}" class="h_registration_url">{title}</a>
+</div>
+<!-- end::PAGE_BLOCK_registration -->
+
+<!-- begin::MENU_BLOCK_logoff -->
+<div class="ptr h_menu_logoff">
+	<img src="/content/img/logoff.svg" width="41" height="25" data-dropdown-id="h_menu_logoff" onclick="oApp.core.dropdown.toggle(this)">
+	<div id="h_menu_logoff" class="ak_dropdown_blk">
+		{timelimit_discounts}
+		{mailing}
+		{logout}
+	</div>
+</div>
+<!-- end::MENU_BLOCK_logoff -->
+
+<!-- begin::MENU_BLOCK_info -->
+<div class="ptr h_menu_info_block">
+	<span class="h_menu_info_title h_menu_v" data-dropdown-id="h_menu_info" onclick="oApp.core.dropdown.toggle(this)">Информация</span>
+	<div id="h_menu_info" class="ak_dropdown_blk">
+		{delivery}
+		{about}
+		{vacancies}
+		{payments_info}
+		{edo}
+		{returns_info}
+		{guarantee}
+		{api}
+		{partnership}
+		{rights_info}
+		
+	</div>
+</div>
+<!-- end::MENU_BLOCK_info -->
+
+<!-- begin::PAGE_link -->
+<a href="{url}" class="{class}">{title}</a>
+<!-- end::PAGE_link -->
+
+<!-- begin::non_indexed -->
+<meta name="robots" content="noindex, nofollow">
+<!-- end::non_indexed -->
+
+<!-- begin::auth_js_inline -->
+Extend('oApp.oAuth', {
+	tpl: {tpl}
+});
+<!-- end::auth_js_inline -->
+
+<!-- begin::core_js_inline -->
+Extend('oApp.core', {
+	tpl: {tpl}
+});
+<!-- end::core_js_inline -->
+
+<!-- begin::auth_panel -->
+<form method="POST" name="auth_panel" class="h_auth_panel flxv" action="{protocol}://{domain}/" onsubmit="oApp.oAuth.onSubmit()">
+	<div class="ak_panel_btn_close" onclick="%close%"></div>
+	<h2>Авторизация</h2>
+	<input type="text" name="login" maxlength="20" placeholder="Логин">
+	<input type="password" name="password" maxlength="15" placeholder="Пароль">
+	Если Вы забыли пароль, обратитесь к своему менеджеру. 
+	<input type="submit" value="Войти">
+</form>
+<!-- end::auth_panel -->
+
+<!-- begin::ERROR -->
+<p>ОШИБКА: {message}</p>
+<!-- end::ERROR -->
+
+<!-- begin::error_panel -->
+<div class="ak_error_panel flxv">
+	<div class="ak_panel_btn_close" onclick="%close%"></div>
+	<img width="66px" height="66px" src="/content/img/error.svg">
+	<h2>Ошибка!</h2>
+	<p>{message}</p>
+	<input type="button" value="ОК" onclick="%close%">
+</div>
+<!-- end::error_panel -->
+
+<!-- begin::ya_metrika -->
+(function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
+m[i].l=1*new Date();k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)})
+(window, document, "script", "https://mc.yandex.ru/metrika/tag.js", "ym");
+ym(26374239, "init", {
+	clickmap:true,
+	trackLinks:true,
+	accurateTrackBounce:true
+});
+<!-- end::ya_metrika -->
